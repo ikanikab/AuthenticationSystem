@@ -1,11 +1,26 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectDb from "./config/db.js";
+import { createClient } from "redis";
 
 //Loads variables from .env into process.env.
 dotenv.config();
 
 await connectDb(); //Only after successful connection,start the Express server
+
+const redisUrl= process.env.REDIS_URL;
+if (!redisUrl){
+    console.log("Missing Redis url");
+    process.exit(1);
+}
+
+export const redisClient = createClient({
+    url: redisUrl,
+});
+
+redisClient.connect()
+.then(() => 
+    console.log("Connected to Redis")).catch(console.error);
 
 const app = express(); //Creates an Express application.
 
