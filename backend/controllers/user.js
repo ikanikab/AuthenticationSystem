@@ -233,3 +233,9 @@ export const verifyOtp= TryCatch(async(req, res) =>{
         user,
     });
 });
+
+export const myProfile= TryCatch(async( req, res) => {
+    const user= req.user;
+
+    res.json(user);
+});
