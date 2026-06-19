@@ -350,3 +350,46 @@ export const getVerifyEmailHtml = ({ email, token }) => {
 </html>`;
 return html;
 };
+
+
+export const getResetPasswordHtml = ({ email, token }) => {
+  const appName = process.env.APP_NAME || "TaskFlow";
+  const baseUrl = process.env.FRONTEND_URL || "http://localhost:5173";
+  const resetUrl = `${baseUrl.replace(/\/+$/, "")}/reset-password/${encodeURIComponent(token)}`;
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"/><title>${appName} Reset Password</title></head>
+<body style="margin:0;padding:0;background:#f6f7fb;font-family:Arial,Helvetica,sans-serif;">
+<table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" style="background:#f6f7fb;">
+<tr><td align="center" style="padding:24px;">
+<table role="presentation" width="600" border="0" cellspacing="0" cellpadding="0"
+  style="background:#fff;border:1px solid #e9ecf3;border-radius:12px;max-width:600px;">
+<tr><td style="background:#111827;padding:18px 24px;text-align:center;">
+  <span style="color:#fff;font-weight:700;font-size:16px;">${appName}</span>
+</td></tr>
+<tr><td style="padding:32px;">
+  <h1 style="margin:0 0 12px;font-size:22px;color:#111;font-weight:700;">Reset your password</h1>
+  <p style="margin:0 0 16px;font-size:15px;color:#444;line-height:1.6;">
+    We received a request to reset your password. Click the button below. This link expires in <strong>15 minutes</strong>.
+  </p>
+  <div style="text-align:center;margin:24px 0;">
+    <a href="${resetUrl}" target="_blank"
+      style="background:#111827;color:#fff;text-decoration:none;padding:12px 24px;
+      border-radius:8px;font-size:14px;font-weight:600;display:inline-block;">
+      Reset Password
+    </a>
+  </div>
+  <p style="color:#555;font-size:14px;line-height:1.6;margin:0;">
+    If you didn't request a password reset, you can safely ignore this email.
+  </p>
+</td></tr>
+<tr><td style="text-align:center;color:#6b7280;font-size:12px;padding:16px 24px;border-top:1px solid #e9ecf3;">
+  © ${new Date().getFullYear()} ${appName}
+</td></tr>
+</table>
+</td></tr>
+</table>
+</body>
+</html>`;
+};
