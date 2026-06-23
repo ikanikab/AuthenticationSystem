@@ -1,4 +1,8 @@
 import { createTransport } from 'nodemailer';
+import dns from 'dns';
+
+// Force IPv4 first — fixes ENETUNREACH on hosts without IPv6 egress (e.g. Render)
+dns.setDefaultResultOrder('ipv4first');
 
 const sendMail = async ({ email, subject, html }) => {
   const transport = createTransport({
@@ -9,7 +13,7 @@ const sendMail = async ({ email, subject, html }) => {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASSWORD,
     },
-    connectionTimeout: 10000, // 10s — fail fast instead of hanging
+    connectionTimeout: 10000,
   });
 
   try {
@@ -22,7 +26,7 @@ const sendMail = async ({ email, subject, html }) => {
     console.log(`Email sent successfully to ${email}`);
   } catch (error) {
     console.error("EMAIL SEND FAILED:", error.message);
-    throw error; // let TryCatch in the controller catch and report this
+    throw error;
   }
 };
 
