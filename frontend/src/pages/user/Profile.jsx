@@ -63,11 +63,10 @@ export default function Profile() {
               ["Name", user?.name],
               ["Email", user?.email],
               ["Role", user?.role],
-              ["Member since", user?.createdAt ? new Date(user.createdAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "—"],
             ].map(([label, value]) => (
               <tr key={label} style={{ borderBottom: "1px solid var(--border)" }}>
                 <td style={{ padding: "11px 0", width: 140, color: "var(--text-secondary)", fontSize: 13 }}>{label}</td>
-                <td style={{ padding: "11px 0", fontWeight: 500, fontSize: 14, textTransform: "capitalize" }}>{value || "—"}</td>
+                <td style={{ padding: "11px 0", fontWeight: 500, fontSize: 14, textTransform: label === "Role" ? "capitalize" : "none" }}>{value || "—"}</td>
               </tr>
             ))}
           </tbody>
@@ -87,17 +86,13 @@ export default function Profile() {
           {resetLoading ? <span className="spinner" /> : "Reset Password"}
         </button>
 
-        <Link to="/" className="btn btn-secondary" style={{ justifyContent: "center" }}>
-          Go to Home
-        </Link>
-
-        <button
+        {/* <button
           className="btn btn-danger"
           onClick={handleLogout}
           style={{ justifyContent: "center" }}
         >
           Logout
-        </button>
+        </button> */}
       </div>
     </div>
   );

@@ -75,7 +75,11 @@ export default function Sidebar() {
       </nav>
 
       <div className="sidebar-footer">
-        <button onClick={handleLogout} style={{ color: "#f87171" }}>
+        <button
+          className="btn btn-danger"
+          onClick={handleLogout}
+          style={{ justifyContent: "center" }}
+        >
           <Icon path={ICONS.logout} />
           Logout
         </button>
