@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { verifyOtp } from "../../api";
 import { useAuth } from "../../context/AuthContext";
