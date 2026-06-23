@@ -7,8 +7,8 @@ dns.setDefaultResultOrder('ipv4first');
 const sendMail = async ({ email, subject, html }) => {
   const transport = createTransport({
     host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
+    port: 587, //updated port
+    secure: false,
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASSWORD,
