@@ -9,6 +9,7 @@ const sendMail = async ({ email, subject, html }) => {
     host: "smtp.gmail.com",
     port: 587, //updated port
     secure: false,
+    family:4, //force IPv4
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASSWORD,
