@@ -1,29 +1,21 @@
-import { createTransport } from 'nodemailer';
-import dns from 'dns';
+import { Resend } from 'resend';
 
-// Force IPv4 first — fixes ENETUNREACH on hosts without IPv6 egress (e.g. Render)
-dns.setDefaultResultOrder('ipv4first');
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const sendMail = async ({ email, subject, html }) => {
-  const transport = createTransport({
-    host: "smtp.gmail.com",
-    port: 587, //updated port
-    secure: false,
-    family:4, //force IPv4
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASSWORD,
-    },
-    connectionTimeout: 10000,
-  });
-
   try {
-    await transport.sendMail({
-      from: process.env.SMTP_USER,
+    const { data, error } = await resend.emails.send({
+      from: `${process.env.APP_NAME || "TaskFlow"} <onboarding@resend.dev>`,
       to: email,
       subject,
       html,
     });
+
+    if (error) {
+      console.error("EMAIL SEND FAILED:", error.message);
+      throw new Error(error.message);
+    }
+
     console.log(`Email sent successfully to ${email}`);
   } catch (error) {
     console.error("EMAIL SEND FAILED:", error.message);
