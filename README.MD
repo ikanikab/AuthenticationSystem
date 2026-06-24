@@ -8,11 +8,14 @@ A full-stack MERN application featuring a production-grade authentication system
 
 ## Tech Stack
 
-**Frontend:** React, React Router, Axios
-**Backend:** Node.js, Express.js
-**Database:** MongoDB, Redis(Upstash)
-**Auth & Security:** JWT, bcrypt, Resend (email API)
-**Deployment:** Vercel (frontend), Render (backend), MongoDB Atlas, Upstash Redis
+| Category                      | Technologies                                                      |
+| ----------------------------- | ----------------------------------------------------------------- |
+| **Frontend**                  | React, React Router, Axios                                        |
+| **Backend**                   | Node.js, Express.js                                               |
+| **Database**                  | MongoDB, Redis (Upstash)                                          |
+| **Authentication & Security** | JWT, bcrypt, Resend (Email API)                                   |
+| **Deployment & Hosting**      | Vercel (Frontend), Render (Backend), MongoDB Atlas, Upstash Redis |
+
 
 ---
 
